@@ -17,7 +17,7 @@ CREATE TABLE chatrooms (
   id INT PRIMARY KEY AUTO_INCREMENT,
   chatroom_name VARCHAR(100) NOT NULL,
   about VARCHAR(1000),
-  file_enabled TINYINT(1) DEFAULT 1 NOT NULL,
+  is_file_transfer_enabled TINYINT(1) DEFAULT 1 NOT NULL,
   is_direct_chat TINYINT(1) DEFAULT 0 NOT NULL,
   is_deleted TINYINT(1) DEFAULT 0 NOT NULL,
   created_at DATETIME NOT NULL,
@@ -26,10 +26,8 @@ CREATE TABLE chatrooms (
   updated_user_id INT NOT NULL REFERENCES users(id)
 );
 
--- user_in_chatroomテーブル
-CREATE TABLE user_in_chatroom (
-  chatroom_id INT REFERENCES chatrooms(id),
-  user_id INT REFERENCES users(id),
+-- users_in_chatroomsテーブル
+CREATE TABLE users_in_chatrooms (
   joined_at DATETIME NOT NULL,
   PRIMARY KEY(chatroom_id, user_id)
 );
@@ -55,7 +53,7 @@ CREATE TABLE tasks (
   file_name VARCHAR(100),
   user_id_in_charge INT NOT NULL,
   deadline DATETIME,
-  completed TINYINT(1) DEFAULT 0 NOT NULL,
+  is_complete TINYINT(1) DEFAULT 0 NOT NULL,
   is_deleted TINYINT(1) DEFAULT 0 NOT NULL,
   created_at DATETIME NOT NULL,
   created_user_id INT NOT NULL REFERENCES users(id),
