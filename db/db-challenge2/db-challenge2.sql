@@ -8,8 +8,8 @@ CREATE TABLE users (
   phone_number VARCHAR(13),
   mobile_number VARCHAR(13),
   is_deleted TINYINT(1) DEFAULT 0 NOT NULL,
-  created_at DATETIME NOT NULL,
-  updated_at DATETIME NOT NULL
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- chatroomsテーブル
@@ -20,9 +20,9 @@ CREATE TABLE chatrooms (
   is_file_transfer_enabled TINYINT(1) DEFAULT 1 NOT NULL,
   is_direct_chat TINYINT(1) DEFAULT 0 NOT NULL,
   is_deleted TINYINT(1) DEFAULT 0 NOT NULL,
-  created_at DATETIME NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   created_user_id INT(11) NOT NULL REFERENCES users(id),
-  updated_at DATETIME NOT NULL,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL ON UPDATE CURRENT_TIMESTAMP,
   updated_user_id INT(11) NOT NULL REFERENCES users(id)
 );
 
@@ -30,7 +30,7 @@ CREATE TABLE chatrooms (
 CREATE TABLE users_in_chatrooms (
   chatroom_id INT(11) REFERENCES chatrooms(id),
   user_id INT(11) REFERENCES users(id),
-  joined_at DATETIME NOT NULL,
+  joined_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   PRIMARY KEY(chatroom_id, user_id)
 );
 
@@ -41,9 +41,9 @@ CREATE TABLE posts (
   post VARCHAR(1000) NOT NULL,
   file_name VARCHAR(100),
   is_deleted TINYINT(1) DEFAULT 0 NOT NULL,
-  posted_at DATETIME NOT NULL,
+  posted_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   posted_user_id INT(11) NOT NULL REFERENCES users(id),
-  updated_at DATETIME NOT NULL,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL ON UPDATE CURRENT_TIMESTAMP,
   updated_user_id INT(11) NOT NULL REFERENCES users(id)
 );
 
@@ -56,8 +56,8 @@ CREATE TABLE tasks (
   deadline DATETIME,
   is_complete TINYINT(1) DEFAULT 0 NOT NULL,
   is_deleted TINYINT(1) DEFAULT 0 NOT NULL,
-  created_at DATETIME NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   created_user_id INT(11) NOT NULL REFERENCES users(id),
-  updated_at DATETIME NOT NULL,
-  updated_user_id INT(11) NOT NULL REFERENCES users(id)
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  updated_user_id INT(11) NOT NULL REFERENCES users(id) 
 );
