@@ -52,7 +52,7 @@ CREATE TABLE tasks (
   id INT(11) PRIMARY KEY AUTO_INCREMENT,
   chatroom_id INT(11) NOT NULL REFERENCES chatrooms(id),
   task VARCHAR(1000) NOT NULL,
-  assigned_user_id INT(11) NOT NULL,
+  assigned_user_id INT(11) NOT NULL REFERENCES users(id),
   deadline DATETIME,
   is_complete TINYINT(1) DEFAULT 0 NOT NULL,
   is_deleted TINYINT(1) DEFAULT 0 NOT NULL,
