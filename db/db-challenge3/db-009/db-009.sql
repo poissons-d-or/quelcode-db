@@ -1,4 +1,4 @@
-SELECT COUNT(p.*) AS 投稿数,
+SELECT COUNT(p.id) AS 投稿数,
   c.chatroom_name AS チャットルーム名
 FROM chatrooms AS c
   JOIN posts AS p ON c.id = p.chatroom_id
